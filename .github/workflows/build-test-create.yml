@@ -28,3 +28,5 @@ jobs:
       steps:
         - run: |
             gh workflow --repo slaclab/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}} "
+        env:
+            GITHUB_TOKEN: ${{ secrets.TRIGGER_WORKFLOW_SECRET }}
