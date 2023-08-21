@@ -23,16 +23,16 @@ jobs:
          - name: Build the Docker image
            run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
          - name: Docker Metadata
-            id: meta
-            uses: docker/metadata-action@v4
-            with:
+          id: meta
+          uses: docker/metadata-action@v4
+          with:
               # list of Docker images to use as base name for tags
-              images: ${{env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            images: ${{env.REGISTRY }}/${{ env.IMAGE_NAME }}
               # generate Docker tags based on the following events/attributes
-              tags: |
-                type=sha
+            tags: |
+              type=sha
               labels: |
-                maintainer=seano@slac.stanford.edu
+              maintainer=seano@slac.stanford.edu
           - name: Build and push Docker image
             uses: docker/build-push-action@v4
             id: build_and_push
