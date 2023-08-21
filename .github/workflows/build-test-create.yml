@@ -20,8 +20,6 @@ jobs:
         IMAGE_TO_DEPLOY: ${{ steps.meta.outputs.tags }}
       steps:
          - uses: actions/checkout@v3
-         - name: Build the Docker image
-           run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
          - name: Checkout source code
            uses: actions/checkout@v3
          - name: Set up Docker Buildx
@@ -44,18 +42,12 @@ jobs:
             labels: |
               maintainer=seano@slac.stanford.edu
          - name: Build and push Docker image
-           uses: docker/build-push-action@v4
-           id: build_and_push
+           uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
            with:
-              context: .
-              file: ./Dockerfile
-              platforms: |
-                linux/amd64
-                linux/arm64/v8
-              provenance: false
-              push: true
-              tags: ${{ steps.meta.outputs.tags }}
-              labels: ${{ steps.meta.outputs.labels }}
+            context: .
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
     deploy:
       name: Start Deployment
       runs-on: ubuntu-latest
