@@ -10,55 +10,11 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+workflow_dispatch:
 jobs:
-  build_and_test:
-    name: Build and Test Project
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0
-        with:
-          versionSpec: "5.x"
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v0
-        with:
-          useConfigFile: true
-      - name: Manage Version
-        run: |
-          echo "Modify build.gradle for with version number \"$GitVersion_Major.$GitVersion_Minor.$GitVersion_Patch\""
-          sed -i "s#^.*version.*=.*#version = '$GitVersion_Major.$GitVersion_Minor.$GitVersion_Patch'#" build.gradle
-          cat build.gradle
-      - uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 19
-      - name: Build project
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assemble
-        env:
-          CI: true
-      - name: Test Project
-        uses: gradle/gradle-build-action@v2
-        env:
-          CI: true
-        with:
-          arguments: test
-      - name: Uplaod artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ApplicationJar
-          path: build/libs/*
-          retention-days: 1
   build-docker-images:
     name: Build and Publish Docker Image
     runs-on: ubuntu-latest
-    needs: build_and_test
     outputs:
       IMAGE_TO_DEPLOY: ${{ steps.meta.outputs.tags }}
     steps:
@@ -87,7 +43,7 @@ jobs:
           tags: |
             type=sha
           labels: |
-            maintainer=bisegni@slac.stanford.edu
+            maintainer=seano@slac.stanford.edu
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         id: build_and_push
