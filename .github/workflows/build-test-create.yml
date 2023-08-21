@@ -4,13 +4,13 @@ on:
     secrets:
       token:
         required: false
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-workflow_dispatch:
 jobs:
   build-docker-images:
     name: Build and Publish Docker Image
