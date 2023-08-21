@@ -12,8 +12,12 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 jobs:
-  build-docker-images:
-    runs-on: ubuntu-latest
+    build-docker-images:
+      name: Build and Publish Docker Image
+      runs-on: ubuntu-latest
+      needs: build_and_test
+      outputs:
+        IMAGE_TO_DEPLOY: ${{ steps.meta.outputs.tags }}
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
