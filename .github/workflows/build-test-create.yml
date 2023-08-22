@@ -11,7 +11,6 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  GH_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
 jobs:
     build-docker-images:
       name: Build and Publish Docker Image
