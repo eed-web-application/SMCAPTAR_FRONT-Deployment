@@ -28,7 +28,7 @@ jobs:
            with:
             registry: ${{ env.REGISTRY }}
             username: ${{ github.actor }}
-            password: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
+            password: ${{ secrets.GITHUB_TOKEN }}
          - name: Docker Metadata
            id: meta
            uses: docker/metadata-action@v4
@@ -56,3 +56,4 @@ jobs:
             gh workflow --repo slaclab/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}} "
           env:
             GITHUB_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
+password: ${{ secrets.GITHUB_TOKEN }}
