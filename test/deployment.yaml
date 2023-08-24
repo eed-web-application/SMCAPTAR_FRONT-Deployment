@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: SMCAPTAR_FRONT
+  name: smartcaptar-front
   labels:
-    app: SMCAPTAR_FRONT
+    app: smartcaptar-front
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: SMCAPTAR_FRONT
+      app: smartcaptar-front
   template:
     metadata:
       labels:
-        app: SMCAPTAR_FRONT
+        app: smartcaptar-front
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io.scheme: 'http'
@@ -20,9 +20,9 @@ spec:
         prometheus.io/port: '8080'
     spec:
       containers:
-      - name: SMCAPTAR_FRONT
+      - name: smartcaptar-front
         imagePullPolicy: Always
-        image: ghcr.io/slaclab/smcaptar_front:sha-42db0ae
+        image: ghcr.io/slaclab/smartcaptar-front:sha-42db0ae
         envFrom:
         - configMapRef:
             name: env-config-map
