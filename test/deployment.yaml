@@ -17,7 +17,7 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io.scheme: 'http'
         prometheus.io/path: '/actuator/prometheus'
-        prometheus.io/port: '5050'
+        prometheus.io/port: '8080'
     spec:
       containers:
       - name: smartcaptar-front
