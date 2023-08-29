@@ -33,7 +33,7 @@ spec:
         env:
         - name: public_url
           value: "/smartcaptar/"        
-          ports:
+        ports:
         - containerPort: 80
       imagePullSecrets:
       - name: github-secret
