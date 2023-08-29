@@ -30,7 +30,10 @@ spec:
           limits:
             memory: 512Mi
             cpu: "250m"
-        ports:
+        env:
+        - name: public_url
+          value: "/smartcaptar/"        
+          ports:
         - containerPort: 80
       imagePullSecrets:
       - name: github-secret
