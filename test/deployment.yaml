@@ -17,7 +17,7 @@ spec:
       containers:
       - name: smartcaptar-front
         imagePullPolicy: Always
-        image: ghcr.io/slaclab/smartcaptar-front:sha-406c4ca
+        image: ghcr.io/slaclab/smartcaptar-front:sha-5c58932
         envFrom:
         - configMapRef:
             name: env-config-map
