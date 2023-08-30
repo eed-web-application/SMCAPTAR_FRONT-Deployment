@@ -29,6 +29,6 @@ spec:
         - name: public_url
           value: "/smartcaptar/"        
         ports:
-        - containerPort: 80
+        - containerPort: 3000
       imagePullSecrets:
       - name: github-secret
