@@ -54,6 +54,6 @@ jobs:
     needs: build-docker-images
     steps:
       - run: |
-          gh workflow --repo slaclab/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}} "
+          gh workflow --repo eed-web-application/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}}"
         env:
           GITHUB_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
