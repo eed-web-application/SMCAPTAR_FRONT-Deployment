@@ -56,4 +56,4 @@ jobs:
       - run: |
           gh workflow --repo eed-web-application/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}}"
         env:
-          GITHUB_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
+          GH_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
