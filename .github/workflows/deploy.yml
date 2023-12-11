@@ -34,7 +34,6 @@ jobs:
                 git commit -m "Update test deployment ot uses the image '$DEPLOY_IMAGE'"
                 git push
                 echo "commit_hash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-
     update-production-deployment:
         runs-on: ubuntu-latest
         environment:
