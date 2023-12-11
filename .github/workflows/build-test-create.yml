@@ -53,7 +53,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-docker-images
     steps:
+      - name: debug trigger
+        run: |
+          echo "TRIGGER_WORFLOW_SECRET: ${{ secrets.TRIGGER_WORFLOW_SECRET }}"
       - run: |
           gh workflow --repo eed-web-application/SMCAPTAR_FRONT-Deployment run Deployment -f deployment_image="${{needs.build-docker-images.outputs.IMAGE_TO_DEPLOY}}"
         env:
-          GITHUB_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET}}
+          GITHUB_TOKEN: ${{ secrets.TRIGGER_WORFLOW_SECRET }}
