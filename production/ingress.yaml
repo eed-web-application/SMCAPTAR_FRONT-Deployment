@@ -4,15 +4,16 @@ metadata:
   name: smartcaptar-front-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/whitelist-source-range: 134.79.0.0/16,172.16.0.0/12
   labels:
     name: smartcaptar-front-ingress
 spec:
   rules:
-  - host: "accel-webapp-dev.slac.stanford.edu"
+  - host: "accel-webapp.slac.stanford.edu"
     http:
       paths:
       - pathType: Prefix
-        path: /smartcaptar(/|$)(.*)
+        path: /smartcaptar(/|$)(.*)        
         backend:
           service:
             name: smartcaptar-front-service

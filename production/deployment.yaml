@@ -1,36 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: SMCAPTAR_FRONT
+  name: smartcaptar-front
   labels:
-    app: SMCAPTAR_FRONT
+    app: smartcaptar-front
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: SMCAPTAR_FRONT
+      app: smartcaptar-front
   template:
     metadata:
       labels:
-        app: SMCAPTAR_FRONT
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io.scheme: "http"
-        prometheus.io/path: "/actuator/prometheus"
-        prometheus.io/port: "8080"
+        app: smartcaptar-front
     spec:
       containers:
-        - name: SMCAPTAR_FRONT
-          imagePullPolicy: Always
-        image: abc
-          envFrom:
-            - configMapRef:
-                name: env-config-map
-          resources:
-            limits:
-              memory: 512Mi
-              cpu: "250m"
-          ports:
-            - containerPort: 8080
+      - name: smartcaptar-front
+        imagePullPolicy: Always
+        image: ghcr.io/eed-web-application/smartcaptar-front:sha-60519e1
+        envFrom:
+        - configMapRef:
+            name: env-config-map
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "250m"
+        env:
+        - name: public_url
+          value: "/smartcaptar/"        
+        ports:
+        - containerPort: 80
       imagePullSecrets:
-        - name: gh-secret
+      - name: github-secret
